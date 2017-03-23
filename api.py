@@ -15,7 +15,7 @@ class Api:
     def POST(self):  
         i = web.input().data
         data = json.loads(i)
-        return predic(data)
+        return json.dumps(predic(data))
 
 if __name__ == "__main__":
     web.wsgi.runwsgi = lambda func, addr=None: web.wsgi.runfcgi(func, addr)
