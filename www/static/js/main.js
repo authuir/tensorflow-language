@@ -94,7 +94,7 @@ class Main {
                     //alert("Data: " + data + "\nStatus: " + status);
                     var obj = JSON.parse(data);
                     for (var i = 0; i < 3; i++) {
-                        $('#output tr').eq(i+1).find('td').eq(1).text(obj[i+3]+"  (概率:"+obj[i]+")");
+                        $('#output tr').eq(i+1).find('td').eq(1).text(obj[i+3]+"  (Predict Rate:"+obj[i]+")");
                     }
                     for (var i = 0; i < 3; i++) {
                         //$('#output tr').eq(i+1).find('td').eq(0).text(obj[i+3+3]+"  (概率:"+obj[i+3]+")");
