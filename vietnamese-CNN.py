@@ -370,6 +370,6 @@ def test(testimg):
         '''
 #train()
 try:
-    test('E:/python/tensorflow/Hnd/Tny/Sample007/img007-054.jpg')
+    test('./Hnd/Tny/Sample007/img007-054.jpg')
 except Exception as e:
     print(e)

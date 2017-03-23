@@ -112,4 +112,4 @@ def pre_handle():
 
 # trans('E:/python/tensorflow/Hnd/Yny/Sample019/')
 # pre_handle()
-resizeImg(ori_img='E:/python/tensorflow/Hnd/others/test.png',dst_img='E:/python/tensorflow/Hnd/others/testout.png',dst_w=40,dst_h=30,save_q=100)
+# resizeImg(ori_img='E:/python/tensorflow/Hnd/others/test.png',dst_img='E:/python/tensorflow/Hnd/others/testout.png',dst_w=40,dst_h=30,save_q=100)
