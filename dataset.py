@@ -1,3 +1,6 @@
+#!/usr/bin/python
+#coding=utf-8
+
 from PIL import Image as image
 from PIL import ImageFile
 import numpy as np
