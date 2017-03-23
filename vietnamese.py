@@ -155,7 +155,7 @@ def train():
     accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))                
                                                                 #多个批次的准确度均值
     saver = tf.train.Saver()
-    Target_Accuracy = 0.5
+    Target_Accuracy = 0.57
     #训练过程
     with tf.Session() as sess:
         sess.run(tf.global_variables_initializer())
@@ -170,7 +170,7 @@ def train():
                 print ("accuracy:", accu)
             if(accu>Target_Accuracy):
                 break
-        saver.save(sess, "./save.ckpt")
+        saver.save(sess, "./model/softmax.ckpt")
 
 def test(testimg):
     #输入图像
@@ -188,7 +188,7 @@ def test(testimg):
     #测试
     with tf.Session() as sess:
         sess.run(tf.global_variables_initializer())
-        saver.restore(sess, "./save.ckpt")
+        saver.restore(sess, "./model/softmax.ckpt")
         accu = sess.run(y_actual, feed_dict={y_actual: tester.labels})
         actual = -1
         for i in range(0,AlphaBeta_num):
@@ -221,8 +221,8 @@ def test(testimg):
         print ("预测:", AlphaBeta[predict[1]+1],"，概率:", pr_mean[1])
         print ("预测:", AlphaBeta[predict[2]+1],"，概率:", pr_mean[2])
 
-#train()
-try:
-    test('E:/python/tensorflow/Hnd/Tny/Sample007/img007-054.jpg')
-except Exception as e:
-    print(e)
+train()
+#try:
+#    test('./Hnd/Tny/Sample007/img007-054.jpg')
+#except Exception as e:
+#    print(e)
