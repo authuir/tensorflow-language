@@ -25,7 +25,6 @@ correct_prediction = tf.equal(tf.argmax(y_predict,1), tf.argmax(y_actual,1))
 accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))                
                                                             #多个批次的准确度均值
 saver = tf.train.Saver()
-    
 
 def train():
     #训练数据
