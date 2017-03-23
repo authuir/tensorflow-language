@@ -16,10 +16,7 @@ class Api:
         i = web.input().data
         data = json.loads(i)
         rate, code = predic(data)
-        rtn = '["%f","%f","%f","%s","%s","%s","%f","%f","%f","%s","%s","%s"]' 
-                % ( rate[0],rate[1],rate[2],code[0],code[1],code[2],
-                    rate[0],rate[1],rate[2],code[0],code[1],code[2]
-                    )
+        rtn = '["%f","%f","%f","%s","%s","%s","%f","%f","%f","%s","%s","%s"]' % ( rate[0],rate[1],rate[2],code[0],code[1],code[2],rate[0],rate[1],rate[2],code[0],code[1],code[2])
         return rtn
 
 if __name__ == "__main__":
