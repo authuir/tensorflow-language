@@ -1,12 +1,4 @@
 /* global $ */
-
-function xjson(xjson) {
-    var obj = JSON.parse(xjson);
-    for (var i = obj.length - 1; i >= 0; i--) {
-        console.log(obj[i]);
-    }
-}
-
 class Main {
 
     constructor() {
@@ -100,14 +92,13 @@ class Main {
                 },
                 function(data,status){
                     //alert("Data: " + data + "\nStatus: " + status);
-                    xjson(data);
                     var obj = JSON.parse(data);
-                    //for (var i = 0; i < 3; i++) {
-                    //    $('#output tr').eq(i+1).find('td').eq(1).text(obj[i+3]+"  (Predict Rate:"+obj[i]+")");
-                    //}
-                    //for (var i = 0; i < 3; i++) {
+                    for (var i = 0; i < 3; i++) {
+                        $('#output tr').eq(i+1).find('td').eq(1).text(obj[i+3]+"  (Predict Rate:"+obj[i]+")");
+                    }
+                    for (var i = 0; i < 3; i++) {
                         //$('#output tr').eq(i+1).find('td').eq(0).text(obj[i+3+3]+"  (概率:"+obj[i+3]+")");
-                    //}
+                    }
             });
         };
         img.src = this.canvas.toDataURL();
