@@ -5,7 +5,7 @@ This program use [sugyan's project](https://github.com/sugyan/tensorflow-mnist) 
 
 ## Demo
 
-![screencast]()
+![screencast](https://raw.githubusercontent.com/authuir/tensorflow-language/master/Demo/demo.gif)
 
 ## Requirement ##
 
