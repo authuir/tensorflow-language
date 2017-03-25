@@ -18,15 +18,15 @@ x = tf.placeholder(tf.float32, [None, 1200])
 y_actual = tf.placeholder(tf.float32, shape=[None, DataSet.AlphaBeta_num])
 W = tf.Variable(tf.zeros([1200,DataSet.AlphaBeta_num]))             #初始化权值W
 b = tf.Variable(tf.zeros([DataSet.AlphaBeta_num]))                  #初始化偏置项b
-y_predict = tf.nn.softmax(tf.matmul(x,W) + b)               #加权变换并进行softmax回归，得到预测概率
+y_predict = tf.nn.softmax(tf.matmul(x,W) + b)                       #加权变换并进行softmax回归，得到预测概率
 cross_entropy = tf.reduce_mean(-tf.reduce_sum(y_actual*tf.log(y_predict),reduction_indices=1))   
-                                                            #求交叉熵
+                                                                    #求交叉熵
 train_step = tf.train.GradientDescentOptimizer(0.01).minimize(cross_entropy)   
-                                                            #用梯度下降法使得残差最小
+                                                                    #用梯度下降法使得残差最小
 correct_prediction = tf.equal(tf.argmax(y_predict,1), tf.argmax(y_actual,1))   
-                                                            #在测试阶段，测试准确度计算
+                                                                    #在测试阶段，测试准确度计算
 accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))                
-                                                            #多个批次的准确度均值
+                                                                    #多个批次的准确度均值
 
 
 def train():

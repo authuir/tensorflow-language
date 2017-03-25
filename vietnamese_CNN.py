@@ -15,7 +15,7 @@ from dataset import DataSet
 # 传递 shape 就可以返回weight和bias的变量
 def weight_variable(shape):
     initial = tf.truncated_normal(shape, stddev=0.1)    
-    return tf.Variable(initial)                            
+    return tf.Variable(initial)
 
 def bias_variable(shape):
     initial = tf.constant(0.1, shape=shape)
@@ -52,8 +52,8 @@ x_image = tf.reshape(xs, [-1, 40, 30, 1])
 W_conv1 = weight_variable([5, 5, 1, 32])                 # patch 5x5, in size 1, out size 32
 b_conv1 = bias_variable([32])
 # 构建第一个convolutional层，外面再加一个非线性化的处理relu
-h_conv1 = tf.nn.relu(conv2d(x_image, W_conv1) + b_conv1)             # output size 40x30x32
-# 经过pooling后，长宽缩小为14x14
+h_conv1 = tf.nn.relu(conv2d(x_image, W_conv1) + b_conv1)            # output size 40x30x32
+# 经过pooling后，长宽缩小为20x15
 h_pool1 = max_pool_2x2(h_conv1)                                     # output size 20x15x32
 
 ## 2. conv2 layer ##
@@ -61,7 +61,7 @@ h_pool1 = max_pool_2x2(h_conv1)                                     # output siz
 W_conv2 = weight_variable([5, 5, 32, 64])                 # patch 5x5, in size 32, out size 64
 b_conv2 = bias_variable([64])
 # 构建第二个convolutional层
-h_conv2 = tf.nn.relu(conv2d(h_pool1, W_conv2) + b_conv2)             # output size 14x14x64
+h_conv2 = tf.nn.relu(conv2d(h_pool1, W_conv2) + b_conv2)            # output size 20x15x64
 # 经过pooling后，长宽缩小为7x7
 h_pool2 = max_pool_5x5(h_conv2)                                     # output size 4x3x64
 
