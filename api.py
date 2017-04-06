@@ -3,8 +3,8 @@
 
 import web
 import json
-import subprocess
-from vietnamese_CNN import predic
+import vietnamese
+import vietnamese_CNN
 
 urls = (
     '/api', 'Api',
@@ -15,8 +15,9 @@ class Api:
     def POST(self):  
         i = web.input().data
         data = json.loads(i)
-        rate, code = predic(data)
-        rtn = '["%f","%f","%f","%s","%s","%s","%f","%f","%f","%s","%s","%s"]' % ( rate[0],rate[1],rate[2],code[0],code[1],code[2],rate[0],rate[1],rate[2],code[0],code[1],code[2])
+        rate, code = vietnamese.predic(data)
+        rate_CNN, code_CNN = vietnamese_CNN.predic(data)
+        rtn = '["%f","%f","%f","%s","%s","%s","%f","%f","%f","%s","%s","%s"]' % ( rate_CNN[0],rate_CNN[1],rate_CNN[2],code_CNN[0],code_CNN[1],code_CNN[2],rate[0],rate[1],rate[2],code[0],code[1],code[2])
         return rtn
 
 if __name__ == "__main__":

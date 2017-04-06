@@ -97,7 +97,7 @@ class Main {
                         $('#output tr').eq(i+1).find('td').eq(1).text(obj[i+3]+"  (Predict Rate:"+obj[i]+")");
                     }
                     for (var i = 0; i < 3; i++) {
-                        //$('#output tr').eq(i+1).find('td').eq(0).text(obj[i+3+3]+"  (概率:"+obj[i+3]+")");
+                        $('#output tr').eq(i+1).find('td').eq(0).text(obj[i+3+3]+"  (概率:"+obj[i+3]+")");
                     }
             });
         };
