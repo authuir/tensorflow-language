@@ -161,41 +161,41 @@ def test(testimg):
         print ("预测:", DataSet.AlphaBeta[predict[1]+1],"，概率:", pr_mean[1])
         print ("预测:", DataSet.AlphaBeta[predict[2]+1],"，概率:", pr_mean[2])
 
-def predic(input_img):
+def predic(input_img, sess):
     data_tester, label_tester = DataSet.data_from_array(input_img)
     tester = DataSet(data_tester, label_tester, dtype=dtypes.float32)
     predict = [-1,-1,-1]
     pr_mean = [-1,-1,-1]
     pr_rtn = ['a','b','c']
-    with tf.Session() as sess:
-        sess.run(tf.global_variables_initializer())
-        saver = tf.train.Saver()
-        saver.restore(sess, "./model/cnn.ckpt")
-        v_xs = tester.images
-        v_ys = tester.labels
-        prdi = sess.run(prediction, feed_dict={xs: v_xs, keep_prob: 1})
-        for i in range(0,DataSet.AlphaBeta_num):
-            if prdi[0,i]> pr_mean[2]:
-                predict[2] = i
-                pr_mean[2] = prdi[0,i]
-            if prdi[0,i]> pr_mean[1]:
-                predict[2] = predict[1]
-                pr_mean[2] = pr_mean[1]
-                predict[1] = i
-                pr_mean[1] = prdi[0,i]
-            if prdi[0,i]> pr_mean[0]:
-                predict[1] = predict[0]
-                pr_mean[1] = pr_mean[0]
-                predict[0] = i
-                pr_mean[0] = prdi[0,i]
-        ald = pr_mean[0] + pr_mean[1] + pr_mean[2]
-        pr_mean[0] = pr_mean[0] / ald
-        pr_mean[1] = pr_mean[1] / ald
-        pr_mean[2] = pr_mean[2] / ald
-        pr_rtn[0]  = DataSet.AlphaBeta[predict[0]+1]
-        pr_rtn[1]  = DataSet.AlphaBeta[predict[1]+1]
-        pr_rtn[2]  = DataSet.AlphaBeta[predict[2]+1]
-    del sess
+
+    sess.run(tf.global_variables_initializer())
+    saver = tf.train.Saver()
+    saver.restore(sess, "./model/cnn.ckpt")
+    v_xs = tester.images
+    v_ys = tester.labels
+    prdi = sess.run(prediction, feed_dict={xs: v_xs, keep_prob: 1})
+    for i in range(0,DataSet.AlphaBeta_num):
+        if prdi[0,i]> pr_mean[2]:
+            predict[2] = i
+            pr_mean[2] = prdi[0,i]
+        if prdi[0,i]> pr_mean[1]:
+            predict[2] = predict[1]
+            pr_mean[2] = pr_mean[1]
+            predict[1] = i
+            pr_mean[1] = prdi[0,i]
+        if prdi[0,i]> pr_mean[0]:
+            predict[1] = predict[0]
+            pr_mean[1] = pr_mean[0]
+            predict[0] = i
+            pr_mean[0] = prdi[0,i]
+    ald = pr_mean[0] + pr_mean[1] + pr_mean[2]
+    pr_mean[0] = pr_mean[0] / ald
+    pr_mean[1] = pr_mean[1] / ald
+    pr_mean[2] = pr_mean[2] / ald
+    pr_rtn[0]  = DataSet.AlphaBeta[predict[0]+1]
+    pr_rtn[1]  = DataSet.AlphaBeta[predict[1]+1]
+    pr_rtn[2]  = DataSet.AlphaBeta[predict[2]+1]
+
     return pr_mean,pr_rtn
 
 #train()

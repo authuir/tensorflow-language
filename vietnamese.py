@@ -97,7 +97,7 @@ def test(testimg):
         print ("预测:", DataSet.AlphaBeta[predict[1]+1],"，概率:", pr_mean[1])
         print ("预测:", DataSet.AlphaBeta[predict[2]+1],"，概率:", pr_mean[2])
 
-def predic(input_img):
+def predic(input_img, sess):
     #输入图像
     data_tester, label_tester = DataSet.data_from_array(input_img)
     tester = DataSet(data_tester, label_tester, dtype=dtypes.float32)
@@ -106,39 +106,39 @@ def predic(input_img):
     pr_mean = [-1,-1,-1]
     pr_rtn = ['a','b','c']
     #测试
-    with tf.Session() as sess:
-        sess.run(tf.global_variables_initializer())
-        saver = tf.train.Saver()
-        saver.restore(sess, "./model/softmax.ckpt")
-        accu = sess.run(y_actual, feed_dict={y_actual: tester.labels})
-        actual = -1
-        for i in range(0,DataSet.AlphaBeta_num):
-            if accu[0,i]>0:
-                actual = i
-                break
-        prdi = sess.run(y_predict, feed_dict={x: tester.images, y_actual: tester.labels})
-        for i in range(0,DataSet.AlphaBeta_num):
-            if prdi[0,i]> pr_mean[2]:
-                predict[2] = i
-                pr_mean[2] = prdi[0,i]
-            if prdi[0,i]> pr_mean[1]:
-                predict[2] = predict[1]
-                pr_mean[2] = pr_mean[1]
-                predict[1] = i
-                pr_mean[1] = prdi[0,i]
-            if prdi[0,i]> pr_mean[0]:
-                predict[1] = predict[0]
-                pr_mean[1] = pr_mean[0]
-                predict[0] = i
-                pr_mean[0] = prdi[0,i]
-        ald = pr_mean[0] + pr_mean[1] + pr_mean[2]
-        pr_mean[0] = pr_mean[0] / ald
-        pr_mean[1] = pr_mean[1] / ald
-        pr_mean[2] = pr_mean[2] / ald
-        pr_rtn[0]  = DataSet.AlphaBeta[predict[0]+1]
-        pr_rtn[1]  = DataSet.AlphaBeta[predict[1]+1]
-        pr_rtn[2]  = DataSet.AlphaBeta[predict[2]+1]
-    del sess
+    #with tf.Session() as sess:
+    sess.run(tf.global_variables_initializer())
+    saver = tf.train.Saver()
+    saver.restore(sess, "./model/softmax.ckpt")
+    accu = sess.run(y_actual, feed_dict={y_actual: tester.labels})
+    actual = -1
+    for i in range(0,DataSet.AlphaBeta_num):
+        if accu[0,i]>0:
+            actual = i
+            break
+    prdi = sess.run(y_predict, feed_dict={x: tester.images, y_actual: tester.labels})
+    for i in range(0,DataSet.AlphaBeta_num):
+        if prdi[0,i]> pr_mean[2]:
+            predict[2] = i
+            pr_mean[2] = prdi[0,i]
+        if prdi[0,i]> pr_mean[1]:
+            predict[2] = predict[1]
+            pr_mean[2] = pr_mean[1]
+            predict[1] = i
+            pr_mean[1] = prdi[0,i]
+        if prdi[0,i]> pr_mean[0]:
+            predict[1] = predict[0]
+            pr_mean[1] = pr_mean[0]
+            predict[0] = i
+            pr_mean[0] = prdi[0,i]
+    ald = pr_mean[0] + pr_mean[1] + pr_mean[2]
+    pr_mean[0] = pr_mean[0] / ald
+    pr_mean[1] = pr_mean[1] / ald
+    pr_mean[2] = pr_mean[2] / ald
+    pr_rtn[0]  = DataSet.AlphaBeta[predict[0]+1]
+    pr_rtn[1]  = DataSet.AlphaBeta[predict[1]+1]
+    pr_rtn[2]  = DataSet.AlphaBeta[predict[2]+1]
+    #del sess
     return pr_mean,pr_rtn
 
 #train()
