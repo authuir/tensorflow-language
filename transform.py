@@ -41,24 +41,3 @@ def resizeImg(**args):
         newHeight = ori_h
         
     im.resize((newWidth,newHeight),image.ANTIALIAS).save(arg['dst_img'],quality=arg['save_q'])
-
-def pre_handle():
-    fp = open("./Eng/all.txt",'r')
-    line = fp.readline()
-    while line:
-        ori_img = './Eng/'+line
-        ori_img = ori_img[0:34]
-        dst_img = ori_img[:6] + 'Tar' + ori_img[9:31] + 'jpg'
-        dirs = dst_img[0:20]
-        try:
-            os.mkdir(dirs)
-        except Exception as e:
-            pass
-        print(ori_img,dst_img,dirs)
-
-        resizeImg(ori_img=ori_img,dst_img=dst_img,dst_w=40,dst_h=30,save_q=100)
-        line = fp.readline()
-        if line == '':
-            break
-    fp.close()
-

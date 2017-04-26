@@ -1,0 +1,7 @@
+node {
+  name: "Softmax/init"
+  op: "NoOp"
+}
+versions {
+  producer: 21
+}
