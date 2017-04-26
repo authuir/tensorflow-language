@@ -29,4 +29,5 @@ then, open your browser and open `http://127.0.0.1/`
 ## How to train ##
 
 `shell> python Softmax.py`
+
 `shell> python CNN.py`
