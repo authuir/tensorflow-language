@@ -12,7 +12,7 @@ from tensorflow.python.framework import dtypes
 from dataset import DataSet_English as DataSet
 
 #构造网络
-Target_Accuracy = 0.57
+Target_Accuracy = 0.3
 global cnt
 global sess
 cnt = 0

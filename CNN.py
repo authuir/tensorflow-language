@@ -41,7 +41,7 @@ def max_pool_5x5(x):
     return tf.nn.max_pool(x, ksize=[1,5,5,1], strides=[1,5,5,1], padding='SAME')    
 
 #输入
-Target_Accuracy = 0.9
+Target_Accuracy = 0.74
 global cnt
 global sess
 cnt = 0
