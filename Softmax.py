@@ -9,7 +9,7 @@ import collections
 import numpy as np
 import tensorflow as tf
 from tensorflow.python.framework import dtypes
-from dataset import DataSet
+from dataset import DataSet_English as DataSet
 
 #构造网络
 Target_Accuracy = 0.57
@@ -36,16 +36,12 @@ with tf.variable_scope("Softmax"):
                                                                 #在测试阶段，测试准确度计算
     accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))                
                                                                 #多个批次的准确度均值
-    #tf.summary.histogram('cross', correct_prediction)
-    
-    
-    
 
 def train():
     #训练数据
-    data_train, label_train = DataSet.data_from_text("./Hnd/trainyny.txt",1450)
+    data_train, label_train = DataSet.data_from_text(DataSet.train_file,DataSet.train_size)
     train = DataSet(data_train, label_train, dtype=dtypes.float32)
-    data_test, label_test = DataSet.data_from_text("./Hnd/testyny.txt",145)
+    data_test, label_test = DataSet.data_from_text(DataSet.test_file,DataSet.test_size)
     test = DataSet(data_test, label_test, dtype=dtypes.float32)
     Datasetsx = collections.namedtuple('Datasetsx', ['train', 'test'])
     Data = Datasetsx(train=train, test=test)

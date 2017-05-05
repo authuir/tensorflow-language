@@ -9,7 +9,7 @@ import collections
 import numpy as np
 import tensorflow as tf
 from tensorflow.python.framework import dtypes
-from dataset import DataSet
+from dataset import DataSet_English as DataSet
 
 # 产生随机变量，符合 normal 分布
 # 传递 shape 就可以返回weight和bias的变量
@@ -94,9 +94,9 @@ with tf.variable_scope("CNN"):
 
 def train():
     #训练数据
-    data_train, label_train = DataSet.data_from_text("./Hnd/trainyny.txt",1450)
+    data_train, label_train = DataSet.data_from_text(DataSet.train_file,DataSet.train_size)
     train = DataSet(data_train, label_train, dtype=dtypes.float32)
-    data_test, label_test = DataSet.data_from_text("./Hnd/testyny.txt",145)
+    data_test, label_test = DataSet.data_from_text(DataSet.test_file,DataSet.test_size)
     test = DataSet(data_test, label_test, dtype=dtypes.float32)
     DataSetsx = collections.namedtuple('DataSetsx', ['train', 'test'])
     Data = DataSetsx(train=train, test=test)
