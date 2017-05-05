@@ -7,7 +7,7 @@ import numpy as np
 from tensorflow.python.framework import dtypes
 from transform import resizeImg
 
-# Dataset for Vietnamese
+# 数据集
 class DataSet(object):
 
     AlphaBeta_num = 29
